@@ -1,0 +1,42 @@
+<fieldset>
+  <legend class="title">Order Summary</legend>
+<section>
+  <div class="left">
+  <!-- <h1>Products Details</h1> -->
+    <ng-container *ngFor="let item of productData">
+      <div class="product">
+        <img [src]="item.thumbnail" alt="Product Image" />
+        <div class="description">
+          <span>{{item.brand  + ' ' + item.title }}</span>
+          <p>{{item.category}}</p>
+          <p>{{item.numberOfItemInCart*item.price|currency: "CAD":"symbol-narrow"}}</p>
+        </div>
+        <div class="data">
+          <h2 class="itemData">Quantity: x{{item.numberOfItemInCart}}</h2>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="amount">
+    <ul>
+      <li>
+        <h2>Price:</h2>
+        <h2 class="value1">{{totalValue|currency: "CAD":"symbol-narrow"}}</h2>
+      </li>
+      <li>
+        <h2>Convenience Fee:</h2>
+        <h2>{{50|currency: "CAD":"symbol-narrow"}}</h2>
+      </li>
+      <li>
+        <h2>Tax:</h2>
+        <h2 class="value2">{{10|currency: "CAD":"symbol-narrow"}}</h2>
+      </li>
+      <li>
+        <h2>Total Amount:</h2>
+        <h2 class="value3">{{ totalValue+10+50 | currency: "CAD":"symbol-narrow" }}</h2>
+      </li>
+    </ul>
+    <button mat-raised-button matStepperNext class="buttonStepper">Place Order</button>
+  </div>
+</section>
+</fieldset>

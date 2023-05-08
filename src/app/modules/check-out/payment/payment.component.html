@@ -1,0 +1,86 @@
+<section *ngIf="!showDiv">
+  <fieldset>
+    <legend class="title">Make Payment</legend>
+    <div class="option">
+      <h3>Payment Methods:</h3>
+      <mat-radio-group [formControl]="paymentOption">
+        <mat-radio-button value="1">Credit/Debit Card</mat-radio-button>
+        <mat-radio-button value="2" style="margin-left: 20px;">UPI Payment</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <form [formGroup]="paymentForm">
+      <div class="card" *ngIf="paymentOption.value==1">
+        <div class="field">
+          <mat-label>Enter Card Number.</mat-label>
+          <mat-form-field appearance="outline" class="icreaseField">
+            <input matInput placeholder="xxxx xxxx xxxx xxxx xxxx" formControlName="cardNumber" credit-card required>
+            <mat-error *ngIf="paymentForm.controls.cardNumber.invalid">*Please enter 16 digit number</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <div class="field">
+            <mat-label>Enter Expiry Date.</mat-label>
+            <mat-form-field appearance="outline">
+              <input matInput type="month" placeholder="MM/YYYY" min="2022-08" formControlName="date">
+              <mat-error *ngIf="paymentForm.controls.date.invalid">*Date is required</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="field">
+            <mat-label>Security Code</mat-label>
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="CVV" formControlName="cvv" maxlength="3" type="password" appOnlyNumber>
+              <mat-icon matSuffix>lock</mat-icon>
+              <mat-error *ngIf="paymentForm.controls.cvv.invalid">*Please Enter 3 digit CVV number</mat-error>
+
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="field">
+          <mat-label>Enter Card Holder Name.</mat-label>
+          <mat-form-field appearance="outline" class="icreaseField">
+            <input matInput placeholder="xyz" formControlName="cardHolderName" required>
+            <mat-error *ngIf="paymentForm.controls.cardHolderName.errors?.required">*Please enter card holder name
+            </mat-error>
+            <mat-error *ngIf="paymentForm.controls.cardHolderName.errors?.minlength">*MinLength should be 3</mat-error>
+            <mat-error *ngIf="paymentForm.controls.cardHolderName.errors?.pattern">*Numbers and specialCharacter are not
+              allowed</mat-error>
+
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+    <form [formGroup]="upiForm">
+      <div class="upi" *ngIf="paymentOption.value==2">
+        <div class="field">
+          <mat-label>Enter Your UPI ID.</mat-label>
+          <mat-form-field appearance="outline" class="icreaseField">
+            <input matInput placeholder="" formControlName="upiId" required>
+            <mat-error *ngIf="upiForm.controls.upiId.invalid">*Please enter upiId</mat-error>
+
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+    <div class="btnGroup">
+      <button mat-raised-button type="button" class="backBtn" matStepperPrevious>Back</button>
+      <button mat-raised-button (click)="onSubmit()" type="submit" class="buttonStepper" matStepperNext
+        [disabled]="paymentForm.invalid && upiForm.invalid">Pay Now {{totalValue+10+50|currency:
+        "CAD":"symbol-narrow"}}</button>
+    </div>
+  </fieldset>
+</section>
+<section *ngIf="showDiv">
+  <fieldset>
+    <legend>Order Success</legend>
+    <div class="data" @fadeIn>
+      <div class="imgIcon">
+        <!-- <img src="../../../../assets/images/Cart-PNG-Clipart.png"> -->
+        <mat-icon>check_circle_outline</mat-icon>
+      </div>
+      <p class="successOrder">Your order was completed Successfully !</p>
+      <h3 class="believeMessage">"Thank you for choosing our product. We appreciate your trust and we’ll do our best to meet your expectations."
+      </h3>
+      <button (click)="backHome()" class="back">Back Home</button>
+    </div>
+  </fieldset>
+</section>

@@ -1,0 +1,72 @@
+$color: darkblue;
+$font-weight: 500;
+@mixin btnStyle() {
+  background-color: rgb(174, 255, 255);
+  border: none;
+  outline: 0;
+  padding: 12px;
+  cursor: pointer;
+
+}
+  .add-cart {
+    visibility: hidden;
+    position: absolute;
+    z-index: 100;
+  }
+  .card {
+    width: 500px;
+    height: 380px;
+    margin: 20px 40px;
+    background-color: rgb(245, 255, 255);
+    .categoryBrand {
+      display: flex;
+      justify-content: space-between;
+    }
+    .category {
+      font-size: 18px;
+      font-weight: 500;
+      color: $color;
+    }
+    .productDetail {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+    ::ng-deep .ngxImageZoomThumbnail {
+      width:500px;
+      height: 220px;
+    }
+
+    .description {
+      font-size: 18px;
+      margin-top: 30px;
+      text-align: center;
+      color: $color;
+      font-family: "Times New Roman", Times, serif;
+    }
+    .actionBtn {
+      display: flex;
+      justify-content: center;
+      gap: 100px;
+      .addCartBtn {
+        border: none;
+        outline: 0;
+        padding: 12px;
+        color: $color;
+        background-color: rgb(174, 255, 255);
+        text-align: center;
+        cursor: pointer;
+        width: 500px;
+        font-size: 18px;
+        font-weight: 500;
+      }
+      .label {
+        vertical-align: super;
+        margin: 10px;
+      }
+      .Btn {
+        @include btnStyle();
+      }
+    }
+  }
+// }

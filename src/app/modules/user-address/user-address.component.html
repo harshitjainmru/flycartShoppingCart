@@ -1,0 +1,85 @@
+<section>
+  <header>
+    <img src="../../../assets/images/Azure-Logo-2020-present.png" class="logo">
+    <h3 class="heading">
+      Shopping Cart
+    </h3>
+    <div class="icons">
+      <mat-icon id="homeIcon">home</mat-icon>
+      <mat-icon class="Icon">account_circle</mat-icon>
+    </div>
+  </header>
+  <form [formGroup]="countryForm">
+    <div class="dropdownFields">
+      <div class="Fields">
+        <div class="subCat">
+          <h4>Country</h4>
+          <mat-form-field appearance="outline" class="resizeFormField">
+            <mat-select (selectionChange)="onCountryChange($event.value)" [formControl]="countryControl">
+              <mat-option *ngFor="let item of countrydata" [value]="item">{{item.country}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="sttt" formArrayName="states"  *ngIf="!showDropDown">
+          <h4>State</h4>
+          <div class="state">
+            <div class="subCat1" *ngFor="let s of stateData()?.controls; let stateid=index">
+              <div [formGroupName]="stateid">
+                <mat-form-field appearance="outline" class="resizeFormField">
+                  <mat-select (selectionChange)="onstateChange($event,stateid)" formControlName="state">
+                    <mat-option *ngFor="let stateItem of state" [value]="stateItem.state_name">{{stateItem.state_name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <div formArrayName="districts" *ngIf="!showDistrictDropDown">
+                  <h4 id="districtresize">District</h4>
+                  <div class="district">
+                    <div class="subCat" *ngFor="let data of districtData(stateid).controls; let districtID=index">
+                      <div [formGroupName]="districtID">
+                        <mat-form-field appearance="outline" class="resizeFormField">
+                          <mat-select formControlName="District" (selectionChange)="districtSelection(stateid,districtID)">
+                            <mat-option *ngFor="let item of countryState.get(stateid)" [value]="item">
+                              {{item.district_name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <div class="cityID">
+                          <div formArrayName="cities" class="city" *ngIf="!showCityDropDown">
+                            <h4>City:</h4>
+                            <div id="cityid">
+                              <div class="subCat"
+                                *ngFor="let city_data of cityData(stateid,districtID).controls; let cityID=index">
+                                <div [formGroupName]="cityID">
+                                  <mat-form-field appearance="outline" class="resizeFormField">
+                                    <input matInput placeholder="Enter City" formControlName="city">
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                              <div>
+                                <button class="back" (click)="addMoreCity(stateid,districtID)">Add City</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <button class="back" (click)="addMoreDistrict(stateid)">Add district</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <button class="back" (click)="addMoreState()">Add state</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <button class="submit" (click)="onsubmit()">Submit</button><br>
+  <h1 style="margin: 10px 30px;">
+    {{data.value | json}}
+  </h1>
+</section>

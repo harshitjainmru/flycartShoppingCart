@@ -1,0 +1,225 @@
+$color: darkblue;
+$font-weight: 500;
+@mixin btnStyle() {
+  background-color: rgb(174, 255, 255);
+  border: none;
+  outline: 0;
+  padding: 12px;
+  cursor: pointer;
+}
+section {
+  background-color: rgb(245, 255, 255);
+  header {
+    display: flex;
+    justify-content: space-between;
+    background-color: azure;
+    gap: 50px;
+    padding: 20px;
+    border-bottom: 3px solid gainsboro;
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    .logo{
+      width: 60px;
+      height: 45px;
+      border-radius: 50%;
+      background-color: #fff;
+    }
+    .backIcon {
+      margin-left: -4%;
+        font-size: 40px;
+        color: $color;
+        margin-top: 1px;
+        width: 30px;
+        cursor: pointer;
+
+    }
+
+    .heading {
+      margin: 0px 20%;
+      font-size: 35px;
+      color: $color;
+      font-weight: $font-weight;
+    }
+    .backbtn{
+      @include btnStyle();
+      margin-left: 10%;
+      margin-right: -5%;
+      font-weight: 600;
+    }
+    .icons {
+      display: flex;
+      gap: 20px;
+      margin-right: 2%;
+      margin-top: -2px;
+      @include btnStyle();
+      cursor: pointer;
+      #homeIcon {
+        font-size: 2.5rem;
+        color: $color;
+        margin-top: -10px;
+      }
+      .Icon {
+        font-size: 40px;
+        color: $color;
+        margin-top: -8px;
+        width: 30px;
+      }
+      #cartIcon {
+        font-size: 40px;
+        color: $color;
+        margin-top: -10px;
+        width: 30px;
+      }
+    }
+    ng-deep {
+      .mat-badge-medium.mat-badge-overlap.mat-badge-after .mat-badge-content {
+        right: -20px;
+      }
+      .mat-badge-medium.mat-badge-above .mat-badge-content {
+        top: -8px;
+      }
+    }
+  }
+  .divGroup {
+    display: flex;
+    flex-wrap: nowrap;
+    .cardGroup {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      width: 100%;
+      margin-top: 4%;
+    }
+  .cart {
+    display: flex;
+    flex-direction: column;
+    margin: 5% 6% 0% 0%;
+    width: 750px;
+    #cancelIcon {
+      float: right;
+      font-size: 30px;
+      margin: -20px;
+      cursor: pointer;
+    }
+    .cartHeader {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2px solid grey;
+      h1 {
+        margin-top: 10px;
+      }
+      .emptyCartButton {
+        background: rgb(174, 255, 255);
+        border: none;
+        color: $color;
+        font-weight: bold;
+        margin: 6px 9px;
+        cursor: pointer;
+      }
+    }
+    .emptyCart {
+      .emptyCartImage {
+        width: 450px;
+        height: 300px;
+      }
+      .emptyCartText {
+        text-align: center;
+        .alert {
+          color: red;
+        }
+        .text {
+          color: $color;
+          margin-top: -15px;
+          font-size: 14px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+    .list {
+      display: flex;
+      padding-top: 10px;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid lightgray;
+      .actionButton {
+        cursor: pointer;
+        .dataCount {
+          vertical-align: super;
+          margin: 0px 10px;
+        }
+        .actionIcon {
+          color: #186ff2;
+        }
+        .productCount {
+          vertical-align: super;
+        }
+      }
+      .delete-icon {
+        color: red;
+        cursor: pointer;
+      }
+      .product-image {
+        img {
+          margin: 0 auto;
+          height: 100px;
+          width: 100px;
+          border-radius: 50%;
+        }
+      }
+      .itemDetail {
+        margin: 10px 0px 20px -60px;
+        .brand {
+          margin-bottom: 3px;
+          font-weight: 500;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+  .total-price {
+    margin: 10px 28px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .checkOutBtn{
+    @include btnStyle();
+    font-weight: 600;
+    font-size: 15px;
+    float: right;
+    color: $color;
+  }
+}
+.flying-img {
+  z-index: 1;
+  position: absolute;
+  width: 500px;
+  animation: fly_to_cart 2s linear;
+}
+
+@keyframes fly_to_cart {
+  0% {
+    left: 0;
+    top: 0;
+  }
+  45%,
+  50% {
+    left: var(--left);
+    top: var(--top);
+    opacity: 0.5;
+  }
+  80%,
+  90% {
+    left: var(--left);
+    top: var(--top);
+    transform: scale(0.2);
+    opacity: 0.3;
+  }
+  100% {
+    left: calc(var(--left) + 40px);
+    top: var(--top);
+    transform: scale(0.2);
+    opacity: 0.1;
+  }
+}

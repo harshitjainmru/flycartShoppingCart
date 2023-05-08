@@ -1,0 +1,78 @@
+<section>
+  <header>
+  <img src="../../../assets/images/Azure-Logo-2020-present.png" class="logo">
+    <h3 class="heading">Shopping Cart</h3>
+    <mat-icon (click)="navigateToHome()" id="homeIcon">home</mat-icon>
+    <mat-icon class="user Icon">account_circle</mat-icon>
+  </header>
+  <div *ngIf="!show">
+    <div class="dropdownFields">
+      <div class="category Field">
+        <label class="fieldName">Category</label>
+        <mat-form-field appearance="outline">
+          <mat-label class="labelHeading">Category</mat-label>
+          <mat-select [formControl]="categoryControl">
+            <mat-option *ngFor="let item of categoryData" [value]="item">{{item.category}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="subCategory Field">
+        <label class="fieldName">SubCategory</label>
+        <mat-form-field appearance="outline">
+          <mat-label class="labelHeading">SubCategory</mat-label>
+          <mat-select [formControl]="subCategoryControl">
+            <mat-option *ngFor="let item of categoryControl?.value?.brand" [value]="item">{{item.brandName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="btn">
+        <button mat-raised-button class="actionBtn"(click)="addData()">ADD DATA</button>
+        <button mat-raised-button class="actionBtn" (click)="showTable()">SHOW TABLE</button>
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!show">
+  <section class="table">
+    <form [formGroup]="form">
+      <table *ngIf="displayTable">
+        <thead>
+          <th *ngFor="let item of columns"><h2>{{item.heading}}</h2></th>
+        </thead>
+        <tbody formArrayName="category" *ngFor="let categorydata of Category?.controls; let categoryIndex=index">
+          <ng-container [formGroupName]="categoryIndex">
+            <ng-container>
+              <tr formArrayName="brand" *ngFor="let subCategoryData of getSubCategory(categoryIndex)?.controls; let subCategoryIndex=index">
+                <ng-container [formGroupName]="subCategoryIndex">
+                  <td><ng-container *ngIf="subCategoryIndex==0">{{categorydata.get('categoryId')?.value}}</ng-container></td>
+                  <td><ng-container *ngIf="subCategoryIndex==0">{{categorydata.get('category')?.value}}</ng-container></td>
+                  <td class="data">{{subCategoryData.get('brandName')?.value}}</td>
+                  <td formArrayName="classes" *ngFor="let classItem of getSubCategoryClasses(subCategoryData); let classIndex=index">
+                    <div class="action">
+                        <mat-icon class="mat-18" (click)="actionButton(categoryIndex,subCategoryIndex,classIndex,-1)">remove_circle_outline</mat-icon>
+                        <div  [formGroupName]="classIndex">{{classItem.get('classCount')?.value}}</div>
+                        <mat-icon class="mat-18" (click)="actionButton(categoryIndex,subCategoryIndex,classIndex,1)">add_circle_outline</mat-icon>
+                    </div>
+                  </td>
+                  <td>{{subCategoryData.get('classTotal')?.value}}</td>
+                  <td><mat-icon class="removeIcon" (click)="deleteData(categoryIndex,subCategoryIndex)">delete</mat-icon></td>
+                </ng-container>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </form>
+
+    <button mat-raised-button class="submitBtn"(click)="finalSubmit()">Submit</button>
+  </section>
+</div>
+  <div *ngIf="show" class="submitData">
+    <h2 class="dataHeading">Final Submit Data:</h2>
+    <span class="showData">
+      {{form.value|json}}
+  </span>
+  </div>
+</section>
+
+<router-outlet></router-outlet>

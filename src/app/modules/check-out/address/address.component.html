@@ -1,0 +1,166 @@
+<section>
+  <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+    <div class="contactDetails" formGroupName="contactDetails">
+      <fieldset>
+        <legend class="contact">Contact Details</legend>
+        <div class="Name">
+          <div class="formField">
+            <label>First Name</label>
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="Placeholder" formControlName="first_name" (keydown)="space($event)">
+              <mat-error *ngIf="this.addressForm.controls.contactDetails.get('first_name')?.errors?.required">*First Name is
+                required</mat-error>
+                <mat-error *ngIf="this.addressForm.controls.contactDetails.get('first_name')?.errors?.pattern">*Alphabets and Spaces are allowed</mat-error>
+                <mat-error *ngIf="this.addressForm.controls.contactDetails.get('first_name')?.errors?.minlength">*Minimum length should be 3</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="formField">
+            <label>Last Name</label>
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="Placeholder" formControlName="last_name" (keydown)="space($event)">
+              <mat-error *ngIf="this.addressForm.controls.contactDetails.get('last_name')?.errors?.required">*Last Name is
+                required</mat-error>
+                <mat-error *ngIf="this.addressForm.controls.contactDetails.get('last_name')?.errors?.minlength">*Minimum length should be 3</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="formField">
+          <label>Phone number</label>
+          <mat-form-field appearance="outline" class="resizeField">
+            <input matInput placeholder="Placeholder" formControlName="phone_number" (keydown)="space($event)" appOnlyNumber maxlength="10">
+
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-error *ngIf="this.addressForm.controls.contactDetails.get('phone_number')?.errors?.required">*Phone Number is
+              required</mat-error>
+            <mat-error *ngIf="this.addressForm.controls.contactDetails.get('phone_number')?.errors?.pattern">*Please enter valid phone number</mat-error>
+
+          </mat-form-field>
+        </div>
+        <div class="formField">
+          <label>Email</label>
+          <mat-form-field appearance="outline" class="resizeField">
+            <input matInput placeholder="Placeholder" formControlName="email" (keydown)="space($event)">
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error *ngIf="this.addressForm.controls.contactDetails.get('email')?.errors">*Email is required
+            </mat-error>
+
+          </mat-form-field>
+        </div>
+      </fieldset>
+    </div>
+    <div class="billing" formGroupName="shippingAddress">
+      <fieldset>
+        <legend class="address">Shipping Address</legend>
+        <div class="formField">
+          <label>Street Address</label>
+          <mat-form-field appearance="outline" class="resizeField">
+            <input matInput placeholder="Placeholder" formControlName="address" (keydown)="space($event)">
+            <mat-error *ngIf="this.addressForm.controls.shippingAddress.get('address')?.errors">*Address is required
+            </mat-error>
+
+          </mat-form-field>
+        </div>
+        <div class="addressDetail">
+          <div class="formField">
+            <label>City</label>
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="Placeholder" formControlName="city" (keydown)="space($event)">
+              <mat-error *ngIf="this.addressForm.controls.shippingAddress.get('city')?.errors">*City is required
+              </mat-error>
+
+            </mat-form-field>
+          </div>
+          <div class="formField">
+            <label>State</label>
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="Placeholder" formControlName="state">
+              <mat-error *ngIf="this.addressForm.controls.shippingAddress.get('state')?.errors">*State is required
+              </mat-error>
+
+            </mat-form-field>
+          </div>
+          <div class="formField">
+            <label>Zip Code</label>
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="Placeholder" formControlName="code" (keydown)="space($event)" appOnlyNumber>
+              <mat-error *ngIf="this.addressForm.controls.shippingAddress.get('code')?.errors">*Code is required
+              </mat-error>
+
+            </mat-form-field>
+          </div>
+          <div class="formField">
+            <label>Country</label>
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="Placeholder" formControlName="country">
+              <mat-error *ngIf="this.addressForm.controls.shippingAddress.get('country')?.errors">*Country is required
+              </mat-error>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <div class="checkbox">
+      <input type="checkbox" (change)="setShippingToBillingAddress($event)">&nbsp;
+      <p class="question"> Is Billing Address same as Shipping Address ?</p>
+    </div>
+    <div formGroupName="billingAddress">
+      <fieldset>
+
+        <legend class="address">Billing Address</legend>
+        <div class="formField">
+          <label>Street Address</label>
+          <mat-form-field appearance="outline" class="resizeField">
+            <input matInput placeholder="Placeholder" formControlName="address">
+            <mat-error *ngIf="this.addressForm.controls.billingAddress.get('address')?.errors">*Address is required
+            </mat-error>
+
+          </mat-form-field>
+        </div>
+        <div class="addressDetail">
+          <div class="formField">
+            <label>City</label>
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="Placeholder" formControlName="city">
+              <mat-error *ngIf="this.addressForm.controls.billingAddress.get('city')?.errors">*City is required
+              </mat-error>
+
+            </mat-form-field>
+          </div>
+          <div class="formField">
+            <label>State</label>
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="Placeholder" formControlName="state">
+              <mat-error *ngIf="this.addressForm.controls.billingAddress.get('state')?.errors">*State is required
+              </mat-error>
+
+            </mat-form-field>
+          </div>
+          <div class="formField">
+            <label>Zip Code</label>
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="Placeholder" formControlName="code" appOnlyNumber>
+              <mat-error *ngIf="this.addressForm.controls.billingAddress.get('code')?.errors">*Code is required
+              </mat-error>
+
+            </mat-form-field>
+          </div>
+          <div class="formField">
+            <label>Country</label>
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="Placeholder" formControlName="country">
+              <mat-error *ngIf="this.addressForm.controls.billingAddress.get('country')?.errors">*Country is required
+              </mat-error>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <div class="btnGroup">
+      <button mat-raised-button matStepperPrevious class="backBtn">Back</button>
+      <button mat-raised-button type="submit" class="buttonStepper" matStepperNext
+        [disabled]="addressForm.invalid">Proceed To Payment</button>
+    </div>
+  </form>
+</section>

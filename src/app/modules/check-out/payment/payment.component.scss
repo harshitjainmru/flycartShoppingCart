@@ -1,0 +1,124 @@
+@use '../../../commonFiles/btnStyle.scss';
+$color: darkblue;
+@mixin btnStyle() {
+  background: azure;
+  font-size: 16px;
+  color: $color;
+}
+section {
+  display: flex;
+  justify-content: center;
+  fieldset {
+    padding: 20px 45px;
+    margin: 20px 0px;
+    border: 4px double $color;
+    width: 520px;
+  }
+  .title {
+    color: $color;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: "Cormorant", serif;
+  }
+  form {
+    .icreaseField {
+      width: 500px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      margin-top: 15px;
+      mat-error {
+        margin: -2px 5px 0px -10px;
+        font-size: 15px;
+      }
+      mat-icon {
+        color: lightslategray;
+      }
+    }
+    .option {
+      margin-bottom: 2%;
+    }
+    .row {
+      display: flex;
+      gap: 20px;
+
+      mat-form-field {
+        width: 240px;
+      }
+    }
+  }
+  .btnGroup {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    .backBtn {
+      @include btnStyle();
+      padding: 5px 70px;
+    }
+    .buttonStepper {
+      @include btnStyle();
+      padding: 5px 30px;
+      margin-right: 4%;
+
+      &:disabled {
+        cursor: not-allowed;
+        background-color: gainsboro;
+        color: white;
+      }
+    }
+  }
+  ::ng-deep {
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+      color: $color;
+    }
+    .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+      border-color: $color;
+    }
+    .mat-radio-outer-circle {
+      border-color: $color;
+    }
+    .mat-radio-button.mat-accent .mat-radio-inner-circle {
+      color: $color;
+      background-color: $color;
+    }
+    .mat-radio-ripple {
+      color: $color;
+    }
+  }
+}
+section {
+  .data {
+    img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+    }
+    .imgIcon {
+      mat-icon {
+        font-size: 60px;
+        color: $color;
+        margin-left: 45%;
+      }
+    }
+    .successOrder {
+      text-align: center;
+      font-family: "Cormorant", "serif", sans-serif;
+      font-size: 22px;
+      font-style: normal;
+      color: $color;
+      text-shadow: 0 1px #808d93, -1px 0 #cdd2d5, -1px 2px #808d93, -2px 1px #cdd2d5, -2px 3px #808d93, -3px 2px #cdd2d5;
+    }
+    .believeMessage {
+      color: $color;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    }
+    .back{
+    margin-left: 33%;
+
+    }
+  }
+}

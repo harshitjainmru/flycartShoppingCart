@@ -1,0 +1,82 @@
+<section>
+  <header>
+    <img src="../../../assets/images/Azure-Logo-2020-present.png" class="logo">
+    <mat-icon class="backIcon" [routerLink]="['/shopping-cart']">keyboard_backspace</mat-icon>
+    <h3 class="heading">
+      Shopping Cart
+    </h3>
+    <button [routerLink]="['/user-address']" class="backbtn">Send Formatted Data</button>
+    <div class="icons">
+      <mat-icon id="homeIcon">home</mat-icon>
+      <mat-icon id="cartIcon" *ngIf="orderCount==0" (click)="onCartClick()" class="add-btn">shopping_cart
+      </mat-icon>
+      <mat-icon id="cartIcon" [matBadge]="orderCount" matBadgeColor="warn" *ngIf="orderCount > 0"
+        (click)="onCartClick()" class="add-btn">shopping_cart
+      </mat-icon>
+      <mat-icon class="Icon">account_circle</mat-icon>
+    </div>
+  </header>
+
+
+  <mat-progress-bar mode="indeterminate" *ngIf="spinner"></mat-progress-bar>
+
+
+  <div class="divGroup" *ngIf="!spinner">
+
+    <div class="cardGroup">
+      <ng-container *ngFor="let item of data; let itemIndex = index">
+        <app-product-card [product]="item" [itemIndex]="itemIndex" (addInCart)="addToCartButton($event)"
+          (increseDecrease)="onIncreaseDecreaseFromChield($event)"></app-product-card>
+      </ng-container>
+    </div>
+    <div class="cart" *ngIf="!showContent">
+      <mat-card>
+        <mat-icon id="cancelIcon" (click)="onCartClick()">cancel</mat-icon>
+        <div class="cartHeader">
+          <h1>Your Cart Items</h1>
+          <button class="emptyCartButton" (click)="emptyCart()" *ngIf="totalValue">Remove_all</button>
+        </div>
+        <div class="emptyCart" *ngIf="totalValue==0">
+          <img src="../../../assets/images/emptyCart.jpg" class="emptyCartImage">
+          <div class="emptyCartText">
+            <h2 class="alert">Oops! Your cart is empty!</h2>
+            <p class="text">Looks like you haven't added anything to your cart</p>
+          </div>
+        </div>
+        <ng-container *ngFor="let item of data; let itemIndex = index">
+          <div class="list" *ngIf="item.addToCart">
+            <div class="product-image">
+              <img mat-card-image [src]="item.images[0]" alt="Photo of product" />
+            </div>
+            <div class="itemDetail">
+              <p class="brand">{{item.brand}}</p>
+              <span>
+                Price
+                <span>
+                  {{ item?.totalPrice | currency: "CAD":"symbol-narrow" }}
+                </span>
+              </span>
+            </div>
+            <div class="actionButton">
+              <mat-icon class="actionIcon" (click)="actionButton(itemIndex, -1)">
+                remove_circle_outline</mat-icon>
+              <span class="productCount">{{ item?.numberOfItemInCart }}</span>
+
+              <mat-icon class="actionIcon" (click)="actionButton(itemIndex, +1)">
+                add_circle_outline</mat-icon>
+            </div>
+            <div>
+              <mat-icon class="delete-icon" (click)="deleteItem(itemIndex)" @todoItemAdmin>delete</mat-icon>
+            </div>
+          </div>
+        </ng-container>
+        <div class="total-price" *ngIf="totalValue">
+          <h2>Total Price :</h2>
+          <h2>{{ totalValue | currency: "CAD":"symbol-narrow" }}</h2>
+        </div>
+        <button class="checkOutBtn" (click)="checkoutProducts()" *ngIf="totalValue">Proceed To CheckOut</button>
+      </mat-card>
+    </div>
+  </div>
+
+</section>

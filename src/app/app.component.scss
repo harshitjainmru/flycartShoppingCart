@@ -1,0 +1,68 @@
+// $font-weight: 500;
+// $color: darkblue;
+
+// @mixin btnStyle() {
+//   background-color: rgb(174, 255, 255);
+//   border: none;
+//   outline: 0;
+//   padding: 12px;
+// }
+// section{
+//   background-color: rgb(245, 255, 255);
+//   height: 100%;
+//   header {
+//     display: flex;
+//     justify-content: space-between;
+//     background-color: azure;
+//     gap: 50px;
+//     padding: 20px;
+//     border-bottom: 3px solid gainsboro;
+//     position: fixed;
+//     z-index: 100;
+//     width: 100%;
+//     .backBtn {
+//       @include btnStyle();
+//       font-weight: 800;
+//       color: $color;
+//     }
+//     .heading {
+//       margin: 0px 20px;
+//       font-size: 35px;
+//       color: $color;
+//       font-weight: $font-weight;
+//     }
+//     .icons {
+//       display: flex;
+//       gap: 20px;
+//       margin-right: 2%;
+//       cursor: pointer;
+//       #homeIcon {
+//         font-size: 2.5rem;
+//         color: $color;
+//       }
+//       .Icon {
+//         font-size: 40px;
+//         color: $color;
+//         margin-top: 1px;
+//         width: 30px;
+//       }
+//       #cartIcon {
+//         font-size: 40px;
+//         color: $color;
+//         margin-top: 1px;
+//         width: 30px;
+//       }
+//     }
+//     ng-deep {
+//       .mat-badge-medium.mat-badge-overlap.mat-badge-after .mat-badge-content {
+//         right: -20px;
+//       }
+//       .mat-badge-medium.mat-badge-above .mat-badge-content {
+//         top: -8px;
+//       }
+//     }
+//   }
+//   .routerContent{
+//     padding-top: 40px;
+//   }
+// }

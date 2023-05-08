@@ -1,0 +1,57 @@
+
+<div #addToCartLayer class="add-cart" >
+  <ng-container *ngTemplateOutlet="productTemplate;context:{product:product}"></ng-container>
+</div>
+<div #displayCard  >
+  <ng-container *ngTemplateOutlet="productTemplate;context:{product:product}"></ng-container>
+
+</div>
+
+
+<ng-template  #productTemplate let-item="product">
+<!-- <div class="cardGroup"> -->
+  <!-- <ng-container *ngFor="let item of data; let itemIndex = index"> -->
+
+    <mat-card class="card">
+      <lib-ngx-image-zoom
+[thumbImage]=item.images[0]
+[fullImage]=item.images[0]
+[magnification]="1"
+[enableScrollZoom]="true"
+[enableLens]="true"
+[lensWidth]="200"
+class="image"></lib-ngx-image-zoom>
+      <!-- <img mat-card-image [src]="item.images[0]" [alt]="item.title" class="productImage" id="img"/> -->
+      <mat-card-content>
+        <div class="categoryBrand">
+          <span class="category"> {{item.category | titlecase}} </span>
+          <span class="category">{{ item.brand | titlecase}} </span>
+        </div>
+        <div class="productDetail">
+          <span class="category">Price: ${{ item.price }}</span>
+          <span class="category">{{ item.title | titlecase}}</span>
+        </div>
+        <p class="description">{{item.description | slice:0:46}}</p>
+      </mat-card-content>
+      <mat-card-actions class="actionBtn">
+        <ng-container *ngIf="!item?.addToCart">
+          <button mat-button class="addCartBtn" (click)="addToCartButton()"
+            #addtocartbutton>
+            Add To Cart
+          </button>
+        </ng-container>
+        <!-- //hidden buttons to add and delete -->
+        <span *ngIf="item?.addToCart" >
+          <button mat-raised-button color="accent" class="Btn">
+            <mat-icon (click)="actionButton(-1)">remove_circle_outline</mat-icon>
+          </button>
+          <label class="label">{{item?.numberOfItemInCart}}</label>
+          <button mat-raised-button color="accent"  class="Btn">
+            <mat-icon (click)="actionButton(+1)">add_circle_outline</mat-icon>
+          </button>
+        </span>
+      </mat-card-actions>
+    </mat-card>
+  <!-- </ng-container> -->
+<!-- </div> -->
+</ng-template>

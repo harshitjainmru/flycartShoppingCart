@@ -1,0 +1,112 @@
+$color: darkBlue;
+@mixin divStyle {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 20px;
+}
+@mixin borderText {
+  color: $color;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Cormorant", serif;
+}
+@mixin btnStyle() {
+  background: azure;
+  font-size: 16px;
+  color: $color;
+}
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .formField {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    mat-error {
+      margin: -2px 5px 0px -10px;
+      font-size: 15px;
+    }
+  }
+  fieldset {
+    padding: 20px 45px;
+    margin: 20px 0px;
+    border: 4px double $color;
+  }
+
+  label {
+    color: $color;
+    font-size: 18px;
+  }
+  .mat-form-field {
+    width: 400px;
+  }
+  .resizeField {
+    width: 820px;
+  }
+  .contact {
+    @include borderText();
+  }
+  .contactDetails {
+    .Name {
+      @include divStyle();
+    }
+  }
+  .address {
+    @include borderText();
+  }
+
+  .addressDetail {
+    @include divStyle();
+  }
+
+  .shipping {
+    margin-top: 15px;
+  }
+  .checkbox {
+    display: flex;
+    .question {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 18px;
+    }
+  }
+  .message {
+    margin-right: 20%;
+  }
+  .btnGroup {
+    display: flex;
+    justify-content: space-between;
+    .backBtn {
+      @include btnStyle();
+      padding: 5px 90px;
+    }
+    .buttonStepper {
+      @include btnStyle();
+      padding: 5px 30px;
+
+      &:disabled {
+        cursor: not-allowed;
+        background-color: gainsboro;
+        color: white;
+      }
+    }
+  }
+  ::ng-deep {
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+      color: $color;
+    }
+    .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+      border-color: $color;
+    }
+    .mat-radio-outer-circle {
+      border-color: $color;
+    }
+    .mat-radio-button.mat-accent .mat-radio-inner-circle {
+      color: $color;
+      background-color: $color;
+    }
+    .mat-radio-ripple {
+      color: $color;
+    }
+  }
+}
